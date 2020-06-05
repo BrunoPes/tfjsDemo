@@ -7,13 +7,10 @@
  */
 
 import React from 'react';
-import {View, Text} from 'react-native';
-// import CameraFinder from './src/index';
+import CameraFinder from './src/index';
 
-const App: () => React$Node = () => {
-  return (
-    <View>
-      <Text>ok!</Text>
-    </View>
-  );
+const App = () => {
+  return <CameraFinder />;
 };
+
+export default App;

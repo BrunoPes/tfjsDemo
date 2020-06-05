@@ -8,17 +8,17 @@ const irisModelURI =
 
 const classifyImage = async (imgUri) => {
   const model = await tf.loadLayersModel(irisModelURI);
-  model.summary();
 
   const response = await fetch(imgUri, {}, {isBinary: true});
   const imageData = await response.arrayBuffer();
-  const imageTensor = decodeJpeg(imageData);
+  console.log('Data res: ', response);
+  // const imageTensor = decodeJpeg(imageData);
 
-  const predictResults = await model.predict(imageTensor);
-  const prediction = predictResults[0];
+  // const predictResults = await model.predict(imageTensor);
+  // const prediction = predictResults[0];
 
-  console.log('Prediction: ', predictResults, prediction);
-  return prediction;
+  // console.log('Prediction: ', predictResults, prediction);
+  // return prediction;
 };
 
 export default classifyImage;

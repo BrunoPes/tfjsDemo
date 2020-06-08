@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
+    "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^2.0.0",
     "@tensorflow/tfjs-react-native": "^0.3.0",
     "expo-camera": "^8.2.0",

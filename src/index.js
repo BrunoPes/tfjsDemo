@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { RNCamera } from 'react-native-camera';
-import { Camera } from 'expo-camera';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {RNCamera} from 'react-native-camera';
+import {Camera} from 'expo-camera';
 
 import * as tf from '@tensorflow/tfjs';
 import classifyImage from './helper';
@@ -22,20 +22,20 @@ const CameraFinder = (props) => {
 
   const onCamReady = async () => {
     console.log('TEST: ');
-    const { granted } = await Camera.requestPermissionsAsync();
+    const {granted} = await Camera.requestPermissionsAsync();
     setHasPermission(granted === true);
   };
 
   const takePicture = async () => {
     if (cameraRef && isTfReady && hasPermission) {
       const photo = await cameraRef.takePictureAsync();
-      console.log(photo.uri);
+      console.log('PHOTO IS:', photo);
       classifyImage(photo);
     }
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <Camera
         onCameraReady={(res) => console.log('Ready: ', res)}
         // captureAudio={false}
@@ -44,9 +44,9 @@ const CameraFinder = (props) => {
         type={Camera.Constants.Type.back}
         flashMode={Camera.Constants.FlashMode.off}
       />
-      <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
+      <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
         <TouchableOpacity onPress={takePicture} style={styles.capture}>
-          <Text style={{ fontSize: 14 }}>Take Picture</Text>
+          <Text style={{fontSize: 14}}>Take Picture</Text>
         </TouchableOpacity>
       </View>
     </View>

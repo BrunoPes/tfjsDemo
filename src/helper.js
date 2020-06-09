@@ -4,6 +4,11 @@ import {fetch, decodeJpeg} from '@tensorflow/tfjs-react-native';
 
 import RNFS from 'react-native-fs';
 
+export const getModel = async () => {
+  const model = await mobilenet.load();
+  return model;
+};
+
 const mobileNetModelURI =
   'https://storage.googleapis.com/tfjs-models/savedmodel/mobilenet_v2_1.0_224/model.json';
 const irisModelURI =
@@ -43,20 +48,19 @@ const base64ToUint8Array = (string) => {
   return array;
 };
 
-const classifyImage = async (imgObj) => {
+const classifyImage = async (model, imgObj) => {
   const {uri, data} = imgObj;
 
-  const model = await mobilenet.load();
   // const model = await tf.loadLayersModel(mobileNetModelURI);
-
   // const response = await fetch(uri, {}, {isBinary: true});
   // const imageData = await response.arrayBuffer();
+
   const base64 = await RNFS.readFile(uri, 'base64');
-  const int8Arr = base64ToUint8Array(base64);
-  const imageTensor = decodeJpeg(imageData);
+  const int8Buffer = base64ToUint8Array(base64);
+  const imageTensor = decodeJpeg(int8Buffer);
   const predictResults = await model.classify(imageTensor);
   const prediction = predictResults[0];
-  console.log('PResults: ', prediction);
+  console.log('Predictions: ', predictResults);
 
   return prediction;
 };
